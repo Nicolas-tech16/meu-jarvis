@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#07111f">
+<title>Projeto J.A.R.V.I.S. — Guia completo</title>
+<style>
+:root{--bg:#07111f;--panel:#0d1b2d;--panel2:#10243a;--line:#1d3a53;--text:#eaf5ff;--muted:#9db4c9;--cyan:#55e6f2;--blue:#4798ff;--orange:#ff9e57;--green:#7df0bb}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 75% -15%,#163a59 0,transparent 42%),var(--bg);color:var(--text);font:16px/1.65 system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}a{color:var(--cyan);text-decoration:none}a:hover{text-decoration:underline}.wrap{max-width:1160px;margin:auto;padding:0 22px}.topbar{position:sticky;top:0;z-index:5;background:#07111feF;border-bottom:1px solid var(--line);backdrop-filter:blur(14px)}.nav{height:68px;display:flex;align-items:center;justify-content:space-between;gap:18px}.brand{font-weight:900;letter-spacing:2px;color:var(--cyan)}.brand span{color:var(--text)}.navlinks{display:flex;gap:18px;flex-wrap:wrap;font-size:.9rem}.hero{padding:78px 0 58px;display:grid;grid-template-columns:1.25fr .75fr;gap:38px;align-items:center}.eyebrow{color:var(--cyan);text-transform:uppercase;letter-spacing:3px;font-size:.78rem;font-weight:800}.hero h1{font-size:clamp(2.5rem,6vw,5rem);line-height:1.02;letter-spacing:-2px;margin:14px 0 22px}.hero h1 em{font-style:normal;color:var(--cyan)}.hero p{color:var(--muted);font-size:1.1rem;max-width:700px}.actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:26px}.btn{display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);border-radius:10px;padding:12px 17px;color:var(--text);font-weight:750;background:var(--panel2);cursor:pointer}.btn.primary{background:var(--cyan);color:#06121c;border-color:var(--cyan)}.hud{border:1px solid #24506a;border-radius:22px;background:linear-gradient(145deg,#0f2840,#091624);padding:25px;box-shadow:0 18px 70px #0005}.orb{width:150px;height:150px;margin:4px auto 20px;border:1px solid #55e6f2;border-radius:50%;display:grid;place-items:center;position:relative;box-shadow:0 0 38px #55e6f233,inset 0 0 28px #55e6f222}.orb:before,.orb:after{content:"";position:absolute;border:1px dashed #55e6f288;border-radius:50%;inset:12px}.orb:after{inset:-9px;border-color:#4798ff66}.orb strong{font-size:2rem;letter-spacing:3px;color:var(--cyan)}.meter{height:5px;background:#1b354b;border-radius:9px;overflow:hidden;margin:8px 0 16px}.meter i{display:block;width:8%;height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .3s}.small{font-size:.85rem;color:var(--muted)}.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.stat{background:#0a1928;border:1px solid var(--line);border-radius:10px;padding:12px}.stat b{display:block;color:var(--cyan);font-size:1.15rem}.stat span{font-size:.78rem;color:var(--muted)}section{padding:45px 0;scroll-margin-top:82px}.section-head{max-width:800px;margin-bottom:24px}.section-head h2{font-size:clamp(1.8rem,4vw,2.7rem);line-height:1.12;margin:8px 0 12px}.section-head p{color:var(--muted)}.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.card{background:linear-gradient(150deg,var(--panel),#091624);border:1px solid var(--line);border-radius:15px;padding:20px}.card h3{margin:7px 0}.card p,.card li{color:var(--muted)}.icon{font-size:1.5rem}.notice{padding:15px 17px;border-left:3px solid var(--orange);background:#241b18;border-radius:0 10px 10px 0;color:#f8d9c1;margin:18px 0}.good{border-color:var(--green);background:#0c211e;color:#c9f8e3}.steps{display:grid;gap:14px}.step{display:grid;grid-template-columns:55px 1fr;gap:15px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px}.num{width:42px;height:42px;display:grid;place-items:center;border-radius:12px;background:#12334a;color:var(--cyan);font-weight:900;font-size:1.1rem}.step h3{margin:0 0 7px}.step p{margin:5px 0;color:var(--muted)}code,pre{font-family:ui-monospace,SFMono-Regular,Consolas,monospace}pre{background:#040b13;color:#c8f5ff;border:1px solid #1a3348;border-radius:10px;padding:16px;overflow:auto;font-size:.87rem;line-height:1.55;white-space:pre}.codehead{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:14px;color:var(--muted);font-size:.86rem}.copy{border:1px solid #2b526a;background:#10273a;color:var(--cyan);border-radius:7px;padding:6px 10px;cursor:pointer}.inlinecode{color:var(--cyan);background:#10243a;padding:2px 6px;border-radius:5px}.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}.checklist{display:grid;gap:10px}.check{display:flex;gap:11px;align-items:flex-start;background:var(--panel);border:1px solid var(--line);padding:12px 14px;border-radius:10px;color:var(--muted)}.check input{margin-top:6px;accent-color:var(--cyan);transform:scale(1.15)}.check.done{border-color:#267b66;color:#d5ffed}.faq details{background:var(--panel);border:1px solid var(--line);padding:15px 17px;border-radius:10px;margin:10px 0}.faq summary{font-weight:750;cursor:pointer}.faq p{color:var(--muted)}.footer{border-top:1px solid var(--line);padding:30px 0 50px;color:var(--muted);font-size:.9rem}.pill{display:inline-block;border:1px solid var(--line);border-radius:999px;padding:4px 9px;color:var(--cyan);font-size:.76rem;margin:3px 4px 3px 0}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding-top:48px}.hud{max-width:500px}.grid{grid-template-columns:1fr 1fr}.two{grid-template-columns:1fr}.navlinks{display:none}}@media(max-width:540px){.grid{grid-template-columns:1fr}.wrap{padding:0 15px}.hero h1{letter-spacing:-1px}.step{grid-template-columns:42px 1fr;padding:13px}.num{width:36px;height:36px}}
+
+/* JARVIS LAB — visual upgrade */
+section[hidden]{display:none!important}
+:root{--bg:#050b14;--panel:#0a1727;--panel2:#10263b;--line:#1c3b55;--text:#eef8ff;--muted:#a4bbcf;--cyan:#66f0f5;--blue:#5ba5ff;--orange:#ffb16e;--green:#83f2bd}
+body{background:radial-gradient(ellipse at 12% 5%,#10324a88 0,transparent 32%),radial-gradient(ellipse at 92% 35%,#132f5280 0,transparent 28%),var(--bg)}
+.topbar{background:#050b14ed;border-bottom-color:#234a65}
+.brand{display:flex;align-items:center;gap:9px}.brand:before{content:"";display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--cyan);box-shadow:0 0 16px var(--cyan)}
+.hero{min-height:610px}.hero h1{max-width:800px}.hero h1 em{text-shadow:0 0 34px #55e6f244}
+.card,.step,.faq details{transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.card:hover{transform:translateY(-3px);border-color:#39718e;box-shadow:0 12px 30px #0002}
+.btn{transition:transform .15s ease,filter .15s ease}.btn:hover{transform:translateY(-2px);filter:brightness(1.08);text-decoration:none}
+section:nth-of-type(even){background:linear-gradient(90deg,#08142170,transparent,#08142170)}
+.section-head h2{letter-spacing:-.8px}
+.eyebrow{display:flex;align-items:center;gap:9px}.eyebrow:before{content:"";width:20px;height:1px;background:currentColor}
+.searchbar{display:flex;gap:10px;margin:20px 0 24px;flex-wrap:wrap}.searchbar input{flex:1;min-width:220px;background:#081624;border:1px solid var(--line);border-radius:10px;padding:13px 15px;color:var(--text);font:inherit}.searchbar input:focus{outline:2px solid #55e6f277;border-color:var(--cyan)}.search-result{font-size:.85rem;color:var(--muted);align-self:center}
+.quicknav{display:flex;gap:8px;flex-wrap:wrap;margin-top:22px}.quicknav a{border:1px solid var(--line);border-radius:999px;padding:7px 12px;font-size:.85rem;background:#0b1b2b}
+.progress-track{height:7px;border-radius:99px;background:#19334a;overflow:hidden;margin:10px 0}.progress-track span{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--blue),var(--cyan));transition:width .25s}
+.mini-label{font-size:.73rem;text-transform:uppercase;letter-spacing:1.4px;color:var(--cyan);font-weight:800}
+.tocgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.tocitem{display:flex;gap:10px;align-items:center;border:1px solid var(--line);border-radius:11px;padding:12px;background:#091827;color:var(--text)}.tocitem b{color:var(--cyan);font-size:.82rem}.tocitem:hover{border-color:var(--cyan);text-decoration:none}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:12px}table.compare{border-collapse:collapse;width:100%;min-width:620px;background:#091624}table.compare th,table.compare td{text-align:left;padding:13px 15px;border-bottom:1px solid var(--line);vertical-align:top}table.compare th{color:var(--cyan);background:#10253a}table.compare td{color:var(--muted)}
+.badge-lite{display:inline-block;background:#102b3d;color:var(--cyan);border:1px solid #24516a;border-radius:999px;padding:3px 8px;font-size:.75rem}
+.tipline{display:flex;gap:12px;align-items:flex-start;padding:14px;border:1px solid #24516a;background:#0a1e2c;border-radius:11px;margin:12px 0}.tipline strong{display:block}
+.site-footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:25px}
+.backtop{position:fixed;right:18px;bottom:18px;z-index:6;border:1px solid #2e637c;background:#0a1b2bf2;color:var(--cyan);border-radius:50%;width:45px;height:45px;font-size:1.15rem;cursor:pointer;box-shadow:0 8px 30px #0005}
+@media(max-width:820px){.tocgrid{grid-template-columns:repeat(2,1fr)}.site-footer-grid{grid-template-columns:1fr 1fr}.hero{min-height:unset}}
+@media(max-width:540px){.tocgrid{grid-template-columns:1fr}.site-footer-grid{grid-template-columns:1fr}.stats{grid-template-columns:repeat(3,1fr)}.stat{padding:9px}.stat b{font-size:1rem}.quicknav a{font-size:.8rem}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+
+
+/* Acessibilidade por voz e leitores de tela */
+.skip-link{position:absolute;left:12px;top:-60px;z-index:20;background:var(--cyan);color:#04111a;padding:10px 14px;border-radius:8px;font-weight:800}
+.skip-link:focus{top:10px}
+:focus-visible{outline:3px solid var(--cyan)!important;outline-offset:3px}
+.speech-panel{background:linear-gradient(140deg,#0c2032,#081522);border:1px solid #2a526b;border-radius:16px;padding:20px;margin:20px 0}
+.speech-controls{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:14px}
+.speech-controls select,.speech-controls input{background:#071522;color:var(--text);border:1px solid #2c5068;border-radius:8px;padding:10px;font:inherit;max-width:100%}
+.speech-controls label{display:flex;align-items:center;gap:8px;color:var(--muted);flex-wrap:wrap}
+.speech-status{color:var(--cyan);font-size:.9rem;margin-top:10px;min-height:1.5em}
+.speech-btn{border:1px solid #2a657d;background:#102c40;color:var(--text);padding:10px 14px;border-radius:9px;cursor:pointer;font:inherit;font-weight:700}
+.speech-btn.primary{background:var(--cyan);color:#04111a;border-color:var(--cyan)}
+.accessibility-note{color:var(--muted);font-size:.9rem}
+@media (forced-colors:active){.speech-btn,.card,.step{border:1px solid ButtonText}}
+
+</style>
+</head>
+<body>
+<a class="skip-link" href="#conteudo-principal">Pular para o conteúdo principal</a>
+<header class="topbar"><div class="wrap nav"><a class="brand" href="#inicio">J.A.R.V.I.S.<span> / LAB</span></a><nav class="navlinks" aria-label="Navegação principal"><a href="#visao">Visão geral</a><a href="#acessibilidade-voz">Ouvir tutorial</a><a href="#materiais">Materiais</a><a href="#tutorial">Tutorial</a><a href="#codigo">Código</a><a href="#seguranca">Segurança</a><a href="#video-apoio">Vídeo no YouTube</a><a href="#transformar-ia">Transformar IA</a></nav></div></header>
+<main id="conteudo-principal" tabindex="-1">
+
+<section id="acessibilidade-voz"><div class="wrap"><div class="speech-panel" role="region" aria-labelledby="speech-title">
+<div class="eyebrow">Modo acessível</div><h2 id="speech-title">Ouvir o tutorial com voz</h2>
+<p>Ative a leitura em voz alta para acompanhar o guia sem precisar ler a tela. Selecione uma voz em português e experimente o perfil cinematográfico: fala mais grave, calma e confiante, inspirada em um assistente tecnológico de filme.</p>
+<div class="speech-controls">
+<button class="speech-btn primary" id="speakStart" type="button">▶ Ouvir tutorial</button>
+<button class="speech-btn" id="speakPause" type="button">⏸ Pausar</button>
+<button class="speech-btn" id="speakResume" type="button">▶ Continuar</button>
+<button class="speech-btn" id="speakStop" type="button">■ Parar</button>
+</div>
+<div class="speech-controls">
+<label for="speechVoice">Voz</label><select id="speechVoice" aria-label="Escolher voz para leitura"><option value="">Voz padrão do sistema</option></select>
+<button class="speech-btn" id="cinematicVoice" type="button">🎙 Perfil cinematográfico</button>
+<label for="speechRate">Velocidade <output id="rateValue">0,86×</output><input id="speechRate" type="range" min="0.65" max="1.25" value="0.86" step="0.05" aria-label="Velocidade da narração"></label>
+<label for="speechPitch">Gravidade da voz <output id="pitchValue">0,75</output><input id="speechPitch" type="range" min="0.5" max="1.5" value="0.75" step="0.05" aria-label="Ajustar a altura da voz"></label>
+</div>
+<p id="speechStatus" class="speech-status" role="status" aria-live="polite">Pronto para narrar. Use Tab para navegar pelos controles.</p>
+<p class="accessibility-note">Importante: não é a voz exata do Homem de Ferro/RDJ nem uma cópia do ator. O perfil apenas ajusta velocidade e altura da voz instalada no seu computador; o resultado depende do navegador e das vozes disponíveis. Leitores de tela como NVDA, VoiceOver e Narrador também podem navegar pelo conteúdo e pelos títulos do site.</p>
+</div></div></section>
+
+<section class="wrap hero" id="inicio">
+ <div><div class="eyebrow">Manual de construção • edição iniciante</div><h1>Construa seu próprio <em>J.A.R.V.I.S.</em></h1><p>Um assistente pessoal inspirado no universo do Homem de Ferro: conversa com uma IA, entende comandos por voz, responde falando e pode executar tarefas locais autorizadas. Comece com uma versão simples e evolua por etapas.</p><div class="actions"><a class="btn primary" href="#tutorial">Começar o tutorial ↗</a><a class="btn" href="#codigo">Ver código inicial</a></div>
+<div class="searchbar" role="search" aria-label="Buscar no guia">
+  <input id="guideSearch" type="search" placeholder="Buscar no guia: API, voz, Python, memória..." aria-label="Buscar conteúdo no guia">
+  <button class="btn" id="clearSearch" type="button">Limpar busca</button>
+  <span class="search-result" id="searchResult" aria-live="polite">Pesquise em todo o tutorial</span>
+</div>
+<div class="quicknav" aria-label="Atalhos do guia">
+  <a href="#materiais">Materiais</a><a href="#tutorial">Instalação</a><a href="#codigo">Código</a><a href="#transformar-ia">Conectar uma IA</a><a href="#seguranca">Segurança</a><a href="#roadmap">Plano avançado</a>
+</div>
+
+<div class="stats"><div class="stat"><b>6 fases</b><span>do zero ao assistente</span></div><div class="stat"><b>Python</b><span>linguagem principal</span></div><div class="stat"><b>Modular</b><span>fácil de expandir</span></div></div></div>
+ <aside class="hud"><div class="orb"><strong>J.A.R.V.I.S.</strong></div><div class="eyebrow">Painel de projeto</div><h3>Seu assistente pessoal</h3><p class="small">Arquitetura: microfone → reconhecimento de fala → IA → resposta → voz ou ação autorizada.</p><div class="meter"><i id="progressbar"></i></div><div class="small"><span id="progressText">0 de 8 etapas concluídas</span> • checklist salva nesta página enquanto ela estiver aberta.</div><p><span class="pill">Voz</span><span class="pill">LLM / IA</span><span class="pill">Automação</span><span class="pill">Python</span></p></aside>
+</section>
+<section id="visao"><div class="wrap"><div class="section-head"><div class="eyebrow">01 / Entenda o projeto</div><h2>O que você vai construir?</h2><p>Um projeto realista para computador. Não existe um único botão que crie o JARVIS dos filmes: você combina componentes, testa cada um e só depois conecta tudo.</p></div>
+<div class="grid"><article class="card"><div class="icon">🎙️</div><h3>Ouvir você</h3><p>Captura áudio do microfone e transforma fala em texto. Na primeira versão, você pode digitar os comandos para simplificar.</p></article><article class="card"><div class="icon">🧠</div><h3>Raciocinar com IA</h3><p>Envia a mensagem a um modelo de linguagem por uma API e recebe uma resposta contextualizada.</p></article><article class="card"><div class="icon">🔊</div><h3>Responder em voz</h3><p>Um mecanismo de texto-para-fala lê a resposta em voz alta. A voz e a qualidade dependem do serviço escolhido.</p></article><article class="card"><div class="icon">🖥️</div><h3>Controlar o PC</h3><p>Abre programas e páginas permitidas por funções específicas, em vez de dar acesso irrestrito ao computador.</p></article><article class="card"><div class="icon">🧩</div><h3>Adicionar habilidades</h3><p>Depois, acrescente hora, notas, lembretes, pesquisa, arquivos e integrações — uma habilidade por vez.</p></article><article class="card"><div class="icon">🛡️</div><h3>Manter controle</h3><p>Proteja a chave da API, peça confirmação para ações importantes e não execute texto arbitrário como comando do sistema.</p></article></div></div></section>
+
+<section id="mapa-do-guia"><div class="wrap"><div class="section-head"><div class="eyebrow">Mapa do laboratório</div><h2>Encontre o que precisa</h2><p>Use estes atalhos para ir direto à parte do projeto em que você está trabalhando.</p></div>
+<div class="tocgrid">
+<a class="tocitem" href="#visao"><b>01</b><span>O que é o JARVIS?</span></a>
+<a class="tocitem" href="#materiais"><b>02</b><span>Ferramentas e custos</span></a>
+<a class="tocitem" href="#tutorial"><b>03</b><span>Instalação passo a passo</span></a>
+<a class="tocitem" href="#codigo"><b>04</b><span>Primeiro código</span></a>
+<a class="tocitem" href="#arquitetura"><b>05</b><span>Voz, memória e interface</span></a>
+<a class="tocitem" href="#seguranca"><b>06</b><span>Segurança e privacidade</span></a>
+<a class="tocitem" href="#checklist"><b>07</b><span>Checklist de progresso</span></a>
+<a class="tocitem" href="#transformar-ia"><b>08</b><span>Usar ChatGPT ou Claude</span></a>
+</div></div></section>
+
+<section id="materiais"><div class="wrap"><div class="section-head"><div class="eyebrow">02 / Preparação</div><h2>Materiais e ferramentas</h2><p>Você pode fazer a primeira versão sem comprar equipamentos especiais. Alguns serviços de IA cobram por uso e podem exigir conta.</p></div>
+<div class="grid"><article class="card"><h3>Obrigatório</h3><ul><li>Computador com Windows, macOS ou Linux</li><li>Python 3.11 ou 3.12 recomendado</li><li>Editor de código, como VS Code</li><li>Internet para usar uma API online</li></ul></article><article class="card"><h3>Para voz</h3><ul><li>Microfone (o do notebook serve)</li><li>Caixas de som ou fones</li><li>Biblioteca de reconhecimento de fala</li><li>Biblioteca de síntese de voz</li></ul></article><article class="card"><h3>Contas e custo</h3><ul><li>Uma API de IA compatível com o SDK escolhido</li><li>Verifique preços, limites e métodos de pagamento</li><li>Alternativa: modelo local, se seu PC suportar</li></ul></article></div>
+<div class="notice"><strong>Importante sobre custo:</strong> o código de exemplo usa uma API online. Ela pode não ter uso gratuito e os preços mudam. Defina limites de gasto no painel do provedor. Não coloque sua chave de API em sites públicos, repositórios ou vídeos.</div></div></section>
+<section id="tutorial"><div class="wrap"><div class="section-head"><div class="eyebrow">03 / Mão na massa</div><h2>Tutorial passo a passo</h2><p>Siga na ordem. Testar cada fase separadamente torna muito mais fácil descobrir onde algo deu errado.</p></div>
+<div class="steps">
+<div class="step"><div class="num">1</div><div><h3>Instale o Python e o editor</h3><p>Baixe Python em <a href="https://www.python.org/downloads/" target="_blank" rel="noopener">python.org/downloads</a>. No Windows, marque <strong>“Add Python to PATH”</strong> durante a instalação. Instale o <a href="https://code.visualstudio.com/" target="_blank" rel="noopener">Visual Studio Code</a> e a extensão Python.</p><p>Abra um terminal e confira:</p><div class="codehead"><span>Terminal</span><button class="copy" data-copy="python --version">Copiar</button></div><pre>python --version</pre><p>Se o comando não funcionar no Windows, tente <code class="inlinecode">py --version</code>. Se aparecer uma versão, está pronto.</p></div></div>
+<div class="step"><div class="num">2</div><div><h3>Crie a pasta do projeto</h3><p>Crie uma pasta chamada <code class="inlinecode">jarvis</code>. Abra essa pasta no VS Code. Abra o terminal integrado e crie um ambiente virtual para manter as dependências isoladas.</p><div class="codehead"><span>Windows (PowerShell)</span><button class="copy" data-copy="py -m venv .venv\n.\\.venv\\Scripts\\Activate.ps1">Copiar</button></div><pre>py -m venv .venv
+.\\.venv\\Scripts\\Activate.ps1</pre><p>Se o PowerShell bloquear a ativação, você pode usar o terminal Prompt de Comando e executar <code class="inlinecode">.venv\\Scripts\\activate.bat</code>. Não altere políticas de segurança do sistema sem entender o motivo.</p><div class="codehead"><span>macOS / Linux</span><button class="copy" data-copy="python3 -m venv .venv\nsource .venv/bin/activate">Copiar</button></div><pre>python3 -m venv .venv
+source .venv/bin/activate</pre></div></div>
+<div class="step"><div class="num">3</div><div><h3>Instale as bibliotecas</h3><p>Com o ambiente virtual ativado, instale o SDK oficial do provedor de IA escolhido e a biblioteca para carregar variáveis de ambiente.</p><div class="codehead"><span>Terminal</span><button class="copy" data-copy="python -m pip install openai python-dotenv">Copiar</button></div><pre>python -m pip install openai python-dotenv</pre><p>Este exemplo usa o SDK Python da OpenAI e a API de respostas. Confira a documentação atual antes de adaptar para outro provedor: <a href="https://platform.openai.com/docs/" target="_blank" rel="noopener">documentação da API</a>.</p></div></div>
+<div class="step"><div class="num">4</div><div><h3>Configure sua chave com segurança</h3><p>No painel do provedor, crie uma chave de API. Na pasta do projeto, crie um arquivo chamado <code class="inlinecode">.env</code> e coloque sua chave nele:</p><div class="codehead"><span>Arquivo .env</span><button class="copy" data-copy="OPENAI_API_KEY=sua_chave_aqui">Copiar</button></div><pre>OPENAI_API_KEY=sua_chave_aqui</pre><p>Substitua pelo valor real, sem aspas. Crie também um arquivo <code class="inlinecode">.gitignore</code> com este conteúdo:</p><div class="codehead"><span>Arquivo .gitignore</span><button class="copy" data-copy=".env\n.venv/\n__pycache__/">Copiar</button></div><pre>.env
+.venv/
+__pycache__/</pre><p>Não compartilhe esses arquivos. Se uma chave for exposta, revogue-a no painel e crie outra.</p></div></div>
+<div class="step"><div class="num">5</div><div><h3>Faça a IA conversar por texto</h3><p>Crie <code class="inlinecode">main.py</code>. O primeiro protótipo recebe texto digitado, envia à IA e imprime a resposta. Use o código completo na seção <a href="#codigo">Código inicial</a>. Execute:</p><div class="codehead"><span>Terminal</span><button class="copy" data-copy="python main.py">Copiar</button></div><pre>python main.py</pre><p>Digite uma pergunta e veja se a resposta aparece. Se ocorrer erro de autenticação, confira o arquivo <code class="inlinecode">.env</code> e se a variável foi carregada.</p></div></div>
+<div class="step"><div class="num">6</div><div><h3>Adicione uma voz de saída</h3><p>Para começar sem configurar microfone, use a leitura de texto do sistema ou uma biblioteca de TTS. Uma opção simples é instalar <code class="inlinecode">pyttsx3</code>, que usa vozes instaladas no sistema:</p><div class="codehead"><span>Terminal</span><button class="copy" data-copy="python -m pip install pyttsx3">Copiar</button></div><pre>python -m pip install pyttsx3</pre><p>O exemplo completo de voz está abaixo. A qualidade e as vozes disponíveis variam por sistema operacional. Serviços de voz online podem soar mais naturais, mas enviam áudio ou texto a terceiros.</p></div></div>
+<div class="step"><div class="num">7</div><div><h3>Adicione reconhecimento de voz</h3><p>Depois que o modo de texto funcionar, instale uma biblioteca de captura e reconhecimento de fala, por exemplo <code class="inlinecode">SpeechRecognition</code>. O suporte ao microfone pode exigir dependências adicionais do sistema. Teste a gravação e o reconhecimento em um arquivo separado antes de integrar.</p><div class="codehead"><span>Instalação inicial</span><button class="copy" data-copy="python -m pip install SpeechRecognition">Copiar</button></div><pre>python -m pip install SpeechRecognition</pre><p>O reconhecimento online pode enviar o áudio para um serviço externo. Leia as condições de privacidade e avise outras pessoas antes de gravar em ambientes compartilhados.</p></div></div>
+<div class="step"><div class="num">8</div><div><h3>Crie habilidades e teste com cuidado</h3><p>Implemente cada habilidade como uma função Python específica: informar a hora, abrir um site permitido, guardar uma nota ou abrir um aplicativo conhecido. Para enviar mensagens, apagar arquivos, instalar programas ou fazer compras, exija confirmação humana — e evite automatizar ações irreversíveis.</p><p>Não use <code class="inlinecode">eval()</code>, não passe a resposta da IA diretamente para o terminal e não permita que o modelo execute qualquer comando que inventar.</p></div></div>
+</div></div></section>
+<section id="codigo"><div class="wrap"><div class="section-head"><div class="eyebrow">04 / Código funcional inicial</div><h2>O cérebro do JARVIS</h2><p>Este é um protótipo por texto com respostas da IA. Primeiro faça esta versão funcionar; depois adicione voz. O modelo precisa estar disponível para sua conta e pode ser trocado conforme a documentação do provedor.</p></div>
+<div class="codehead"><span>main.py — versão de texto</span><button class="copy" data-copy-id="maincode">Copiar código</button></div>
+<pre id="maincode">import os
+from dotenv import load_dotenv
+from openai import OpenAI
+
+load_dotenv()
+api_key = os.getenv("OPENAI_API_KEY")
+
+if not api_key:
+    raise RuntimeError(
+        "Chave não encontrada. Confira o arquivo .env."
+    )
+
+client = OpenAI(api_key=api_key)
+
+INSTRUCOES = """
+Você é JARVIS, um assistente pessoal educado, objetivo e útil.
+Responda em português brasileiro.
+Se não souber algo, admita. Não diga que executou ações
+no computador se nenhuma ferramenta realmente as executou.
+Não peça nem revele senhas, chaves privadas ou dados secretos.
+"""
+
+historico = []
+
+def perguntar(texto):
+    historico.append({"role": "user", "content": texto})
+
+    resposta = client.responses.create(
+        model="gpt-4.1-mini",
+        instructions=INSTRUCOES,
+        input=historico
+    )
+
+    texto_resposta = resposta.output_text
+    historico.append({
+        "role": "assistant",
+        "content": texto_resposta
+    })
+
+    # Limita o histórico para não crescer sem controle.
+    del historico[:-20]
+    return texto_resposta
+
+def main():
+    print("JARVIS iniciado. Digite 'sair' para encerrar.")
+    while True:
+        try:
+            mensagem = input("\\nVocê: ").strip()
+            if mensagem.lower() in {"sair", "encerrar", "tchau"}:
+                print("JARVIS: Até mais!")
+                break
+            if not mensagem:
+                continue
+            print("\\nJARVIS:", perguntar(mensagem))
+        except KeyboardInterrupt:
+            print("\\nJARVIS encerrado.")
+            break
+        except Exception as erro:
+            print(f"\\nOcorreu um erro: {erro}")
+            print("Confira internet, chave, saldo/limites e modelo.")
+
+if __name__ == "__main__":
+    main()</pre>
+<div class="notice"><strong>Sobre o modelo:</strong> <code>gpt-4.1-mini</code> é apenas um exemplo. Se não estiver disponível para sua conta ou tiver sido substituído, escolha um modelo compatível listado na documentação atual. A API pode gerar custos.</div>
+<div class="two"><div class="card"><h3>Como executar</h3><ol><li>Salve o arquivo como <code>main.py</code>.</li><li>Confira se o ambiente virtual está ativado.</li><li>Confirme que o arquivo <code>.env</code> está na mesma pasta.</li><li>Execute <code>python main.py</code>.</li><li>Digite uma pergunta; use <code>sair</code> para fechar.</li></ol></div><div class="card"><h3>Como a conversa funciona</h3><p>O programa guarda uma parte das mensagens anteriores em memória para dar contexto. Ao fechar o programa, o histórico desaparece. Não salve conversas sensíveis sem uma razão clara e medidas de proteção.</p></div></div>
+<div class="section-head" style="margin-top:34px"><h2>Dar voz ao assistente</h2><p>Instale a biblioteca e adicione uma função de fala ao arquivo. Depois, substitua a impressão da resposta por uma chamada a <code class="inlinecode">falar(resposta)</code>.</p></div>
+<div class="codehead"><span>Trecho de voz — pyttsx3</span><button class="copy" data-copy-id="voicecode">Copiar código</button></div>
+<pre id="voicecode">import pyttsx3
+
+voz = pyttsx3.init()
+voz.setProperty("rate", 175)  # velocidade aproximada
+
+def falar(texto):
+    voz.say(texto)
+    voz.runAndWait()
+
+# Exemplo:
+# resposta = perguntar("Explique o que é uma IA.")
+# print("JARVIS:", resposta)
+# falar(resposta)</pre>
+<p class="small">Coloque o trecho no mesmo arquivo (depois de instalar <code>pyttsx3</code>). Inicialize a voz uma vez, não a cada mensagem. Se não houver voz ou surgir erro, verifique as vozes instaladas no sistema e teste apenas a função de fala.</p>
+</div></section>
+<section id="arquitetura"><div class="wrap"><div class="section-head"><div class="eyebrow">05 / Próximas melhorias</div><h2>Como transformar o protótipo em assistente</h2><p>Evite tentar fazer tudo no primeiro dia. Uma arquitetura organizada facilita depuração e segurança.</p></div><div class="grid"><article class="card"><h3>Fase A — ouvir</h3><p>Capture áudio apenas depois de iniciar por um botão ou palavra de ativação. Mostre quando o microfone estiver ativo e permita desligá-lo facilmente.</p></article><article class="card"><h3>Fase B — entender</h3><p>Converta áudio em texto, mostre o que foi reconhecido e peça confirmação quando a interpretação estiver incerta.</p></article><article class="card"><h3>Fase C — agir</h3><p>Crie uma lista fechada de ferramentas, com parâmetros validados e permissões mínimas. A IA escolhe entre ferramentas aprovadas; ela não recebe acesso total.</p></article><article class="card"><h3>Fase D — memória</h3><p>Guarde somente preferências não sensíveis e úteis, com opção de visualizar e apagar. Para persistência, use um banco local como SQLite.</p></article><article class="card"><h3>Fase E — interface</h3><p>Monte uma janela com estado do sistema, transcrição, resposta e botão de microfone. Tkinter é uma opção simples para começar.</p></article><article class="card"><h3>Fase F — integrações</h3><p>Calendário, casa inteligente e notificações exigem APIs próprias, autenticação e permissões. Integre uma de cada vez e teste em ambiente seguro.</p></article></div></div></section>
+<section id="seguranca"><div class="wrap"><div class="section-head"><div class="eyebrow">06 / Segurança e privacidade</div><h2>Regras que não devem ser ignoradas</h2></div><div class="two"><div class="card"><h3>Faça sempre</h3><ul><li>Guarde chaves no <code>.env</code> e fora do Git.</li><li>Use limites de gasto e acompanhe o uso da API.</li><li>Peça confirmação antes de ações importantes.</li><li>Valide nomes de arquivos, caminhos e argumentos.</li><li>Mostre quando o microfone estiver gravando.</li><li>Registre erros sem registrar segredos.</li></ul></div><div class="card"><h3>Nunca faça</h3><ul><li>Publicar a chave em HTML ou JavaScript no navegador.</li><li>Executar diretamente texto gerado pela IA no terminal.</li><li>Dar acesso irrestrito a arquivos, câmera ou microfone.</li><li>Deixar gravação contínua oculta.</li><li>Permitir exclusão, envio ou compra sem confirmação.</li><li>Tratar a resposta da IA como sempre correta.</li></ul></div></div><div class="notice good"><strong>Regra de ouro:</strong> a IA sugere; o seu programa valida; você autoriza. A chave da API deve ficar no computador/servidor, nunca em uma página pública. Se criar uma interface web, faça as chamadas à IA pelo backend.</div></div></section>
+
+<section id="roadmap"><div class="wrap"><div class="section-head"><div class="eyebrow">09 / Evolução do projeto</div><h2>Plano de desenvolvimento: iniciante ao avançado</h2><p>Este roteiro ajuda a dividir o projeto em entregas pequenas e testáveis, em vez de tentar criar tudo de uma vez.</p></div>
+<div class="grid">
+<article class="card"><span class="badge-lite">Nível 1 · Base</span><h3>Assistente por texto</h3><p>Python, API, prompt de sistema, histórico limitado e tratamento de erros.</p><p><strong>Pronto quando:</strong> responde de forma consistente e encerra sem travar.</p></article>
+<article class="card"><span class="badge-lite">Nível 2 · Voz</span><h3>Ouvir e falar</h3><p>Entrada por microfone, transcrição visível, fala sintetizada e botão para cancelar.</p><p><strong>Pronto quando:</strong> você consegue interromper e corrigir uma transcrição.</p></article>
+<article class="card"><span class="badge-lite">Nível 3 · Ferramentas</span><h3>Habilidades seguras</h3><p>Hora, notas, abrir sites conhecidos e outras funções explicitamente permitidas.</p><p><strong>Pronto quando:</strong> argumentos inválidos são recusados e ações sensíveis pedem confirmação.</p></article>
+<article class="card"><span class="badge-lite">Nível 4 · Memória</span><h3>Preferências persistentes</h3><p>Armazenamento local, opção de consultar/apagar memórias e dados mínimos.</p><p><strong>Pronto quando:</strong> o usuário entende o que é guardado e consegue excluir.</p></article>
+<article class="card"><span class="badge-lite">Nível 5 · Interface</span><h3>Painel de controle</h3><p>Janela com histórico, estado do microfone, erros, configurações e interruptor geral.</p><p><strong>Pronto quando:</strong> o assistente pode ser desligado rapidamente.</p></article>
+<article class="card"><span class="badge-lite">Nível 6 · Integrações</span><h3>Serviços externos</h3><p>Calendário, domótica, notificações e outras APIs com permissões limitadas.</p><p><strong>Pronto quando:</strong> tokens são protegidos e cada integração tem testes próprios.</p></article>
+</div>
+<div class="section-head" style="margin-top:32px"><h2>API na nuvem ou modelo local?</h2><p>Não existe uma escolha perfeita para todos. Comece pela opção que você consegue configurar e testar com segurança.</p></div>
+<div class="tablewrap"><table class="compare"><thead><tr><th>Critério</th><th>API na nuvem</th><th>Modelo local</th></tr></thead><tbody>
+<tr><td>Configuração</td><td>Geralmente mais simples para começar; precisa de conta e chave.</td><td>Exige instalar um runtime e baixar um modelo.</td></tr>
+<tr><td>Internet</td><td>Normalmente necessária.</td><td>Pode funcionar offline após baixar o modelo.</td></tr>
+<tr><td>Custos</td><td>Pode cobrar por uso; configure limites.</td><td>Sem tarifa por chamada em muitos cenários, mas usa energia e recursos do PC.</td></tr>
+<tr><td>Qualidade e velocidade</td><td>Dependem do modelo, serviço e conexão.</td><td>Dependem muito do hardware e do modelo escolhido.</td></tr>
+<tr><td>Privacidade</td><td>Dados enviados ao provedor conforme seus termos e configurações.</td><td>O processamento pode permanecer local; extensões ainda podem usar a rede.</td></tr>
+<tr><td>Melhor para</td><td>Prototipar rapidamente e experimentar modelos hospedados.</td><td>Experimentar execução local e ter maior controle sobre o processamento.</td></tr>
+</tbody></table></div>
+<div class="tipline"><span>💡</span><div><strong>Recomendação prática</strong>Faça primeiro o assistente por texto funcionar. Não compre hardware nem contrate serviços antes de confirmar que o protótipo atende ao que você quer fazer.</div></div>
+</div></section>
+<section id="diagnostico"><div class="wrap"><div class="section-head"><div class="eyebrow">10 / Diagnóstico</div><h2>Checklist quando algo dá errado</h2><p>Antes de mudar várias coisas ao mesmo tempo, verifique os itens abaixo em ordem.</p></div>
+<div class="grid">
+<article class="card"><h3>O programa nem inicia</h3><ul><li>Confira a versão do Python.</li><li>Ative o ambiente virtual.</li><li>Veja se instalou as bibliotecas no ambiente correto.</li><li>Leia a primeira mensagem de erro completa.</li></ul></article>
+<article class="card"><h3>A IA não responde</h3><ul><li>Verifique a internet e o estado do serviço.</li><li>Confirme que a chave está no ambiente, sem compartilhá-la.</li><li>Confira acesso ao modelo, limites e cobrança.</li><li>Teste uma pergunta curta.</li></ul></article>
+<article class="card"><h3>O áudio não funciona</h3><ul><li>Confira dispositivo de entrada/saída do sistema.</li><li>Teste microfone fora do programa.</li><li>Confira permissões de privacidade do sistema.</li><li>Teste voz e reconhecimento separadamente.</li></ul></article>
+</div>
+<div class="notice"><strong>Ao pedir ajuda com um erro:</strong> compartilhe a mensagem de erro e o sistema operacional, mas remova chaves de API, senhas, tokens, endereços privados e outros dados pessoais.</div>
+</div></section>
+
+<section id="checklist"><div class="wrap"><div class="section-head"><div class="eyebrow">07 / Acompanhe seu progresso</div><h2>Checklist do projeto</h2><p>Marque as etapas conforme concluir. O indicador no topo acompanha seu progresso durante esta sessão.</p></div><div class="checklist" id="checks"><label class="check"><input type="checkbox"> Instalei Python e VS Code.</label><label class="check"><input type="checkbox"> Criei a pasta e ativei o ambiente virtual.</label><label class="check"><input type="checkbox"> Instalei as bibliotecas necessárias.</label><label class="check"><input type="checkbox"> Configurei a chave no arquivo .env.</label><label class="check"><input type="checkbox"> Fiz o JARVIS responder por texto.</label><label class="check"><input type="checkbox"> Fiz o JARVIS falar em voz alta.</label><label class="check"><input type="checkbox"> Testei o reconhecimento de voz.</label><label class="check"><input type="checkbox"> Criei uma habilidade segura e testei.</label></div></div></section>
+<section class="faq"><div class="wrap"><div class="section-head"><div class="eyebrow">08 / Dúvidas frequentes</div><h2>Se algo não funcionar</h2></div><details><summary>“python” não é reconhecido no terminal</summary><p>No Windows, tente <code>py --version</code>. Se funcionar, use <code>py</code> nos comandos. Caso contrário, reinstale Python pelo site oficial e habilite a opção de PATH. Feche e reabra o terminal depois da instalação.</p></details><details><summary>Erro de chave ou autenticação</summary><p>Confirme se o arquivo se chama exatamente <code>.env</code>, se está ao lado do <code>main.py</code> e se a linha é <code>OPENAI_API_KEY=...</code>. Confira se a chave está ativa e se a conta tem acesso à API. Não envie sua chave para ninguém diagnosticar o erro.</p></details><details><summary>Erro de limite, saldo ou modelo</summary><p>Confira o painel de uso, os limites da conta e os modelos disponíveis para sua API. ChatGPT e API são produtos com cobrança e acesso separados em muitos casos; ter assinatura do ChatGPT não significa automaticamente ter crédito na API.</p></details><details><summary>Posso fazer tudo sem internet?</summary><p>Sim, usando um modelo local compatível e ferramentas locais, mas a instalação, a velocidade e a qualidade dependem do hardware. Um modelo local não precisa enviar cada pergunta a um provedor externo, mas você ainda deve cuidar dos dados e permissões.</p></details><details><summary>Como fazer o JARVIS abrir programas?</summary><p>Crie funções explícitas para os aplicativos que você confia, com caminhos conhecidos e validação. Não crie uma função genérica que execute qualquer comando recebido da IA. Teste primeiro com ações inofensivas.</p></details><details><summary>Ele vai ser igual ao JARVIS do filme?</summary><p>Não de início. O projeto ensina os componentes reais por trás de um assistente: linguagem, voz, ferramentas e automação. Recursos avançados exigem engenharia, testes, hardware e integração de vários serviços.</p></details></div></section>
+
+<section class="wrap" id="video-apoio">
+  <div class="section-head">
+    <div class="eyebrow">Vídeo de apoio</div>
+    <h2>Prefere aprender assistindo a alguém programar?</h2>
+    <p>Se alguma etapa deste guia ficar confusa, acompanhe este tutorial em português que mostra como criar um assistente virtual JARVIS com Python, reconhecimento de voz, síntese de fala e comandos automáticos.</p>
+  </div>
+  <div class="card">
+    <h3>▶ Como Criar um Assistente Virtual (JARVIS) com Python — Passo a Passo</h3>
+    <p><strong>Canal:</strong> Adriano Avelar | eAi Academy</p>
+    <p>O vídeo explica a configuração do Python, como fazer o computador ouvir comandos e responder em voz alta. É um complemento ao tutorial deste site; algumas bibliotecas ou etapas podem mudar com o tempo.</p>
+    <p><a class="btn primary" href="https://www.youtube.com/watch?v=Z_uEtZCoDxg" target="_blank" rel="noopener noreferrer">Assistir ao tutorial no YouTube ↗</a></p>
+    <p class="accessibility-note">Dica: assista com o site aberto em outra aba e pause o vídeo para testar cada etapa. Nunca compartilhe sua chave de API nem cole credenciais em códigos públicos.</p>
+  </div>
+</section>
+
+</main>
+
+<section id="transformar-ia"><div class="wrap"><div class="section-head"><div class="eyebrow">09 / Transforme uma IA em JARVIS</div><h2>Como transformar ChatGPT, Claude ou outra IA no cérebro do seu assistente</h2><p>Você não precisa criar um modelo gigantesco do zero. O caminho mais prático é usar um modelo já treinado como cérebro e conectá-lo ao seu programa, à voz e a ferramentas que você controla. O ChatGPT ou o Claude aberto no navegador não se transforma automaticamente no JARVIS: seu programa precisa se conectar ao modelo por uma API ou por uma integração oficialmente suportada.</p></div>
+<div class="notice good"><strong>Ideia principal:</strong> modelo de IA + instruções de personalidade + memória controlada + ferramentas autorizadas + voz = assistente no estilo JARVIS. A IA conversa e decide qual ferramenta aprovada pode ajudar; seu código executa e valida a ação.</div>
+<div class="grid">
+<article class="card"><div class="icon">🧠</div><h3>Opção A — usar uma API</h3><p>Seu programa Python envia mensagens a um modelo na nuvem. É a opção mais simples para obter respostas de boa qualidade, mas exige internet, uma chave de API e pode ter custos.</p></article>
+<article class="card"><div class="icon">💻</div><h3>Opção B — modelo local</h3><p>Executa um modelo no seu próprio computador usando ferramentas como Ollama. Pode melhorar o controle dos dados e reduzir dependência de serviços online, mas velocidade e qualidade dependem do hardware.</p></article>
+<article class="card"><div class="icon">🔌</div><h3>Opção C — integrar uma plataforma existente</h3><p>Use APIs ou integrações oficiais disponíveis no serviço escolhido. Uma assinatura do chat no navegador não garante acesso à API nem cobre seu consumo: confira as condições do provedor.</p></article>
+</div>
+<div class="section-head" style="margin-top:30px"><h2>Passo a passo: conecte um modelo existente</h2><p>Este fluxo serve como mapa geral para ChatGPT/OpenAI, Claude/Anthropic ou outros provedores. Os nomes dos pacotes, formatos de mensagens e recursos variam conforme a API.</p></div>
+<div class="steps">
+<div class="step"><div class="num">1</div><div><h3>Escolha o modelo e a forma de acesso</h3><p>Decida se vai usar uma API hospedada ou um modelo local. Para uma API, crie uma conta no portal de desenvolvedores do provedor e confira modelos disponíveis, preços, limites, política de dados e documentação oficial.</p><p>OpenAI: <a href="https://platform.openai.com/docs/" target="_blank" rel="noopener">documentação da API</a>. Anthropic/Claude: <a href="https://docs.anthropic.com/" target="_blank" rel="noopener">documentação da API</a>. Modelo local: <a href="https://ollama.com/" target="_blank" rel="noopener">Ollama</a>.</p></div></div>
+<div class="step"><div class="num">2</div><div><h3>Crie uma camada de IA separada</h3><p>Não misture tudo no mesmo bloco de código. Crie uma função, por exemplo <code class="inlinecode">perguntar_ia(mensagem, historico)</code>, que recebe a mensagem, chama o provedor escolhido e devolve o texto da resposta. Assim, você pode trocar o modelo sem reescrever voz, interface ou habilidades.</p><p>O exemplo <code class="inlinecode">main.py</code> deste site já faz isso para uma API da OpenAI. Para Claude, substitua a chamada pelo SDK oficial da Anthropic e siga o formato da documentação. Não basta trocar o nome do modelo: APIs diferentes podem ter parâmetros e estruturas diferentes.</p></div></div>
+<div class="step"><div class="num">3</div><div><h3>Dê uma identidade consistente ao assistente</h3><p>Defina instruções de sistema claras: nome, idioma, tom, limites, o que pode fazer e quando deve admitir que não sabe. Isso orienta o comportamento, mas não altera nem treina os pesos do modelo.</p><div class="codehead"><span>Exemplo de instruções</span><button class="copy" data-copy-id="personaCode">Copiar código</button></div><pre id="personaCode">PERSONALIDADE_JARVIS = """
+Você é JARVIS, assistente pessoal do usuário.
+Fale em português brasileiro, com calma, clareza e precisão.
+Seja prestativo, organizado e ligeiramente espirituoso, sem exagerar.
+Explique antes de executar uma ação importante.
+Nunca afirme que fez algo se o programa não confirmou a execução.
+Não invente resultados, não revele segredos e peça esclarecimentos
+quando o pedido for ambíguo.
+Só use ferramentas explicitamente disponibilizadas pelo programa.
+Para ações que alterem arquivos, enviem mensagens ou gerem gastos,
+descreva a ação e peça confirmação antes de continuar.
+"""</pre><p>Coloque as instruções no campo apropriado da API. Não as publique como segredo: elas definem o comportamento, mas a chave da API é que deve ser protegida.</p></div></div>
+<div class="step"><div class="num">4</div><div><h3>Adicione memória com limites</h3><p>O histórico de conversa permite que a IA acompanhe o assunto durante uma sessão. Para lembrar preferências entre sessões, crie uma memória separada, com consentimento e opção de apagar. Salve apenas o necessário, como “prefere respostas curtas”; evite senhas, chaves, documentos privados e gravações desnecessárias.</p><p>Importante: a memória não é a mesma coisa que treinar o modelo. Ela fornece contexto adicional nas próximas conversas. Comece com memória temporária e só depois adicione armazenamento local.</p></div></div>
+<div class="step"><div class="num">5</div><div><h3>Ensine o JARVIS a usar ferramentas</h3><p>Uma IA em conversa normal não controla seu PC por mágica. Você precisa programar ferramentas específicas e descrever para o modelo o que cada uma faz. Exemplos: <code class="inlinecode">ver_hora()</code>, <code class="inlinecode">abrir_site_aprovado(nome)</code> e <code class="inlinecode">criar_nota(texto)</code>.</p><p>O fluxo correto é: a IA solicita uma ferramenta estruturada → seu programa verifica nome e parâmetros → pede confirmação se a ação for sensível → executa uma função permitida → devolve o resultado à IA para formular a resposta. Implemente chamadas de ferramenta usando o recurso oficial da API escolhida; a sintaxe é diferente entre provedores.</p></div></div>
+<div class="step"><div class="num">6</div><div><h3>Conecte entrada e saída de voz</h3><p>Use reconhecimento de fala para converter sua voz em texto e texto-para-fala para ler a resposta. Primeiro, faça o modo de texto funcionar. Depois conecte microfone e alto-falante. Mostre um indicador quando o microfone estiver ativo e ofereça um botão para interromper a escuta.</p></div></div>
+<div class="step"><div class="num">7</div><div><h3>Crie uma interface de assistente</h3><p>Uma janela pode mostrar o que o microfone reconheceu, a resposta da IA, as ferramentas usadas e um botão para cancelar. Você pode começar com Tkinter, depois evoluir para uma aplicação web local. Se criar um site público, nunca coloque a chave da API no código do navegador: faça as chamadas pelo backend.</p></div></div>
+<div class="step"><div class="num">8</div><div><h3>Teste antes de confiar</h3><p>Teste perguntas simples, comandos ambíguos, falta de internet, API fora do ar e respostas erradas. Simule ferramentas primeiro, sem realmente alterar arquivos ou enviar mensagens. Registre erros sem guardar chaves nem dados sensíveis. Só libere cada ação depois de validar seus limites.</p></div></div>
+</div>
+<div class="section-head" style="margin-top:34px"><h2>Exemplo de arquitetura com ferramentas</h2><p>Este é um pseudocódigo para entender o fluxo, não um programa pronto para executar. A chamada de ferramenta exata depende do provedor.</p></div>
+<div class="codehead"><span>Fluxo seguro</span><button class="copy" data-copy-id="toolFlowCode">Copiar código</button></div>
+<pre id="toolFlowCode">mensagem = ouvir_ou_ler_usuario()
+resposta_ou_pedido = perguntar_ia(mensagem, historico)
+
+if resposta_ou_pedido.solicita_ferramenta:
+    ferramenta = encontrar_em_lista_permitida(
+        resposta_ou_pedido.nome
+    )
+    argumentos = validar_argumentos(
+        ferramenta, resposta_ou_pedido.argumentos
+    )
+
+    if ferramenta.acao_sensivel:
+        pedir_confirmacao_humana()
+
+    resultado = executar_apenas_ferramenta_aprovada(
+        ferramenta, argumentos
+    )
+    resposta_final = perguntar_ia_com_resultado(
+        mensagem, resultado, historico
+    )
+else:
+    resposta_final = resposta_ou_pedido.texto
+
+mostrar_resposta(resposta_final)
+falar_se_ativado(resposta_final)</pre>
+<div class="notice"><strong>Não faça isto:</strong> não envie a resposta livre da IA para <code>os.system()</code>, <code>subprocess</code> ou um terminal. Isso pode executar comandos perigosos ou inventados. Use uma lista fechada de ferramentas, valide os argumentos e peça autorização para operações importantes.</div>
+<div class="two"><article class="card"><h3>Quer usar o ChatGPT?</h3><p>Use a API oficial da OpenAI no seu programa e confira os modelos e recursos disponíveis. O ChatGPT no navegador e a API são formas de acesso diferentes; uma não concede automaticamente acesso à outra.</p><p><a href="https://platform.openai.com/docs/" target="_blank" rel="noopener">Abrir documentação OpenAI ↗</a></p></article><article class="card"><h3>Quer usar o Claude?</h3><p>Use a API oficial da Anthropic e implemente a camada de IA de acordo com sua documentação. Mantenha voz, interface e ferramentas separadas da integração específica do modelo.</p><p><a href="https://docs.anthropic.com/" target="_blank" rel="noopener">Abrir documentação Anthropic ↗</a></p></article></div>
+</div></section>
+
+<footer class="footer"><div class="wrap"><strong>J.A.R.V.I.S. / LAB</strong><p>Guia educacional independente. J.A.R.V.I.S. é uma referência ficcional; este projeto não é afiliado à Marvel. APIs, bibliotecas, modelos e preços podem mudar — consulte a documentação oficial antes de usar. O checklist pode guardar seu progresso neste navegador.</p><p><a href="https://www.python.org/downloads/">Python</a> · <a href="https://code.visualstudio.com/">VS Code</a> · <a href="https://platform.openai.com/docs/">Documentação da API</a></p></div></footer>
+<script>
+const boxes=[...document.querySelectorAll('#checks input')];
+const progressKey='jarvis-lab-checklist-v2';
+try{const saved=JSON.parse(localStorage.getItem(progressKey)||'[]');boxes.forEach((b,i)=>b.checked=Boolean(saved[i]));}catch(e){}
+function updateProgress(){let n=boxes.filter(b=>b.checked).length;document.getElementById('progressbar').style.width=(n/boxes.length*100)+'%';document.getElementById('progressText').textContent=n+' de '+boxes.length+' etapas concluídas';boxes.forEach(b=>b.parentElement.classList.toggle('done',b.checked));try{localStorage.setItem(progressKey,JSON.stringify(boxes.map(b=>b.checked)));}catch(e){}}
+boxes.forEach(b=>b.addEventListener('change',updateProgress));
+const searchInput=document.getElementById('guideSearch');
+const searchResult=document.getElementById('searchResult');
+function runGuideSearch(){if(!searchInput)return;const q=searchInput.value.trim().toLocaleLowerCase('pt-BR');let shown=0;document.querySelectorAll('main section').forEach(sec=>{if(sec.id==='inicio'){sec.hidden=false;return;}if(!q){sec.hidden=false;shown++;return;}const match=sec.innerText.toLocaleLowerCase('pt-BR').includes(q);sec.hidden=!match;if(match)shown++;});searchResult.textContent=q?(shown+' seção(ões) com correspondência'):'Pesquise em todo o tutorial';}
+if(searchInput){searchInput.addEventListener('input',runGuideSearch);document.getElementById('clearSearch').addEventListener('click',()=>{searchInput.value='';runGuideSearch();searchInput.focus();});}
+
+document.querySelectorAll('[data-copy]').forEach(btn=>btn.addEventListener('click',async()=>{try{await navigator.clipboard.writeText(btn.dataset.copy);let old=btn.textContent;btn.textContent='Copiado!';setTimeout(()=>btn.textContent=old,1200)}catch(e){btn.textContent='Selecione e copie';}}));
+document.querySelectorAll('[data-copy-id]').forEach(btn=>btn.addEventListener('click',async()=>{let el=document.getElementById(btn.dataset.copyId);try{await navigator.clipboard.writeText(el.innerText);let old=btn.textContent;btn.textContent='Copiado!';setTimeout(()=>btn.textContent=old,1200)}catch(e){btn.textContent='Selecione e copie';}}));
+updateProgress();
+</script>
+<button class="backtop" id="backTop" type="button" aria-label="Voltar ao topo" title="Voltar ao topo">↑</button>
+<script>document.getElementById("backTop").addEventListener("click",()=>window.scrollTo({top:0,behavior:"smooth"}));</script>
+
+<script>
+(function(){
+ const start=document.getElementById('speakStart');
+ const pause=document.getElementById('speakPause');
+ const resume=document.getElementById('speakResume');
+ const stop=document.getElementById('speakStop');
+ const voiceSelect=document.getElementById('speechVoice');
+ const rate=document.getElementById('speechRate');
+ const rateValue=document.getElementById('rateValue');
+ const pitch=document.getElementById('speechPitch');
+ const pitchValue=document.getElementById('pitchValue');
+ const cinematic=document.getElementById('cinematicVoice');
+ const status=document.getElementById('speechStatus');
+ if(!start||!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){
+   if(status) status.textContent='A leitura em voz alta não está disponível neste navegador. Use o leitor de tela do sistema ou experimente uma versão atualizada do Chrome ou Edge.';
+   [start,pause,resume,stop].forEach(b=>{if(b)b.disabled=true;});
+   return;
+ }
+ let utterance=null;
+ function loadVoices(){
+   const voices=window.speechSynthesis.getVoices();
+   const old=voiceSelect.value;
+   voiceSelect.innerHTML='<option value="">Voz padrão do sistema</option>';
+   voices.forEach((v,i)=>{
+     const opt=document.createElement('option');
+     opt.value=String(i);
+     opt.textContent=v.name+' ('+v.lang+')'+(v.default?' — padrão':'');
+     voiceSelect.appendChild(opt);
+   });
+   const portuguese=voices.findIndex(v=>/^pt(-|_)/i.test(v.lang));
+   if(old && [...voiceSelect.options].some(o=>o.value===old)) voiceSelect.value=old;
+   else if(portuguese>=0) voiceSelect.value=String(portuguese);
+ }
+ loadVoices();
+ window.speechSynthesis.onvoiceschanged=loadVoices;
+ rate.addEventListener('input',()=>rateValue.textContent=Number(rate.value).toLocaleString('pt-BR')+'×');
+ pitch.addEventListener('input',()=>pitchValue.textContent=Number(pitch.value).toLocaleString('pt-BR'));
+ cinematic.addEventListener('click',()=>{
+   rate.value='0.86'; rateValue.textContent='0,86×';
+   pitch.value='0.75'; pitchValue.textContent='0,75';
+   const voices=window.speechSynthesis.getVoices();
+   const candidates=voices.map((v,i)=>({v,i})).filter(x=>/^pt(-|_)/i.test(x.v.lang));
+   const maleHint=candidates.find(x=>/male|mascul|daniel|jorge|antonio|antónio|ricardo|paulo|felipe|lucas/i.test(x.v.name));
+   if(maleHint) voiceSelect.value=String(maleHint.i);
+   status.textContent='Perfil cinematográfico aplicado. A voz depende das opções instaladas no sistema.';
+ });
+ function getReadableText(){
+   const main=document.querySelector('main');
+   const clone=main.cloneNode(true);
+   clone.querySelectorAll('#acessibilidade-voz,script,button,select,input,output,.copy,.speech-panel').forEach(el=>el.remove());
+   clone.querySelectorAll('pre').forEach(el=>{el.textContent='Bloco de código disponível para leitura visual ou cópia; pule para o próximo parágrafo.';});
+   clone.querySelectorAll('a').forEach(a=>{a.textContent=a.innerText;});
+   return clone.innerText.replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim();
+ }
+ function speakText(text){
+   window.speechSynthesis.cancel();
+   const chunks=text.match(/[\s\S]{1,1800}(?:\s|$)/g)||[text];
+   let index=0;
+   function next(){
+     if(index>=chunks.length){status.textContent='Narração concluída.';return;}
+     utterance=new SpeechSynthesisUtterance(chunks[index++]);
+     utterance.lang='pt-BR';
+     utterance.rate=Number(rate.value);
+     utterance.pitch=Number(pitch.value);
+     const voices=window.speechSynthesis.getVoices();
+     if(voiceSelect.value!=='' && voices[Number(voiceSelect.value)]) utterance.voice=voices[Number(voiceSelect.value)];
+     utterance.onend=next;
+     utterance.onerror=(e)=>{status.textContent='A narração foi interrompida. Tente outra voz ou use o leitor de tela do sistema.';};
+     window.speechSynthesis.speak(utterance);
+   }
+   next();
+ }
+ start.addEventListener('click',()=>{
+   const text=getReadableText();
+   if(!text){status.textContent='Não encontrei conteúdo para narrar.';return;}
+   status.textContent='Narração iniciada. Você pode pausar ou parar a qualquer momento.';
+   speakText(text);
+ });
+ pause.addEventListener('click',()=>{if(window.speechSynthesis.speaking){window.speechSynthesis.pause();status.textContent='Narração pausada.';}});
+ resume.addEventListener('click',()=>{window.speechSynthesis.resume();status.textContent='Narração retomada.';});
+ stop.addEventListener('click',()=>{window.speechSynthesis.cancel();status.textContent='Narração parada.';});
+})();
+</script>
+
+</body>
+</html>
